@@ -1,4 +1,4 @@
-interface Country {
+export interface Country {
   confirmed: number;
   recovered: number;
   deaths: number;
