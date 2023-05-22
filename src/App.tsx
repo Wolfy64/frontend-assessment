@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import './App.css'
 import countries, { Country } from './countries'
 
+// Check id the value of the key is type of string
 type CountryStringKeys<T> = {
   [K in keyof T]: T[K] extends string ? K : never
 }[keyof T]
 
+// Check id the value of the key is type of number
 type CountryNumberKeys<T> = {
   [K in keyof T]: T[K] extends number ? K : never
 }[keyof T]
@@ -24,7 +26,6 @@ const NEXT_TYPE_OF_SORT = {
     next: 'none',
   },
 } as const
-
 
 function App() {
   const [countryList, setCountryList] = useState(countries)
@@ -45,6 +46,7 @@ function App() {
     switch (nextSort) {
       case 'ascending':
         const sortedAsc = [...countryList].sort((a, b) => {
+          // Check if the value is type of string if so use localeCompare
           return typeof a[id as CountryStringKeys<Country>] === 'string'
             ? a[id as CountryStringKeys<Country>].localeCompare(
                 b[id as CountryStringKeys<Country>]
@@ -57,6 +59,7 @@ function App() {
 
       case 'descending':
         const sortedDes = [...countryList].sort((a, b) => {
+          // Check if the value is type of string if so use localeCompare
           return typeof a[id as CountryStringKeys<Country>] === 'string'
             ? b[id as CountryStringKeys<Country>].localeCompare(
                 a[id as CountryStringKeys<Country>]
